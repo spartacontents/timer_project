@@ -25,19 +25,16 @@
         .timer {
             display: flex;
             gap: 20px;
-            /* 기본 간격 */
             flex-wrap: wrap;
             margin-top: -90px;
-            /* 기본 위치 */
         }
 
         .digit,
         .colon {
-            font-size: 180px;
-            /* 기본 글자 크기 */
+            font-size: 10vw;
             color: #00608D;
             font-weight: bold;
-            width: 160px;
+            width: 100px;
             text-align: center;
         }
 
@@ -45,78 +42,10 @@
             padding: 0 10px;
         }
 
-        /* 화면 크기별 세부 반응형 조정 */
-
-        /* 큰 화면 (1200px 이상) */
-        @media (min-width: 1200px) {
-            .timer {
-                gap: 25px;
-                /* 더 큰 간격 */
-                margin-top: -200px;
-                /* 위치 조정 */
-            }
-
-            .digit,
-            .colon {
-                font-size: 300px;
-                /* 더 큰 글자 크기 */
-                width: 200px;
-            }
-        }
-
-        /* 중간 화면 (768px 이상 1200px 미만) */
-        @media (min-width: 768px) and (max-width: 1199px) {
-            .timer {
-                gap: 20px;
-                /* 기본 간격 */
-                margin-top: -90px;
-                /* 기본 위치 */
-            }
-
-            .digit,
-            .colon {
-                font-size: 160px;
-                /* 중간 글자 크기 */
-                width: 140px;
-            }
-        }
-
-        /* 작은 화면 (480px 이상 768px 미만) */
-        @media (min-width: 480px) and (max-width: 767px) {
-            .timer {
-                gap: 15px;
-                margin-top: -60px;
-                /* 위치 조정 */
-            }
-
-            .digit,
-            .colon {
-                font-size: 120px;
-                /* 작은 글자 크기 */
-                width: 100px;
-            }
-        }
-
-        /* 아주 작은 화면 (480px 미만) */
-        @media (max-width: 479px) {
-            .timer {
-                gap: 10px;
-                margin-top: -40px;
-                /* 위치 조정 */
-            }
-
-            .digit,
-            .colon {
-                font-size: 90px;
-                /* 가장 작은 글자 크기 */
-                width: 80px;
-            }
-        }
-
         #startButton {
             position: absolute;
-            padding: 15px 30px;
-            font-size: 24px;
+            padding: 2vw 4vw;
+            font-size: 1.5vw;
             background-color: #e8344e;
             color: white;
             border: none;
