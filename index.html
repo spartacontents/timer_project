@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <!-- 폰트 적용 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/DNFBitBitv2/DNFBitBitv2.css"
+        type="text/css" />
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "DNFBitBitv2", sans-serif;
+            background-image: url('/assets/bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .timer {
+            display: flex;
+            gap: 20px;
+            /* 기본 간격 */
+            flex-wrap: wrap;
+            margin-top: -90px;
+            /* 기본 위치 */
+        }
+
+        .digit,
+        .colon {
+            font-size: 180px;
+            /* 기본 글자 크기 */
+            color: #00608D;
+            font-weight: bold;
+        }
+
+        .colon {
+            padding: 0 10px;
+        }
+
+        /* 화면 크기별 세부 반응형 조정 */
+
+        /* 큰 화면 (1200px 이상) */
+        @media (min-width: 1200px) {
+            .timer {
+                gap: 25px;
+                /* 더 큰 간격 */
+                margin-top: -110px;
+                /* 위치 조정 */
+            }
+
+            .digit,
+            .colon {
+                font-size: 200px;
+                /* 더 큰 글자 크기 */
+            }
+        }
+
+        /* 중간 화면 (768px 이상 1200px 미만) */
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .timer {
+                gap: 20px;
+                /* 기본 간격 */
+                margin-top: -90px;
+                /* 기본 위치 */
+            }
+
+            .digit,
+            .colon {
+                font-size: 160px;
+                /* 중간 글자 크기 */
+            }
+        }
+
+        /* 작은 화면 (480px 이상 768px 미만) */
+        @media (min-width: 480px) and (max-width: 767px) {
+            .timer {
+                gap: 15px;
+                margin-top: -60px;
+                /* 위치 조정 */
+            }
+
+            .digit,
+            .colon {
+                font-size: 120px;
+                /* 작은 글자 크기 */
+            }
+        }
+
+        /* 아주 작은 화면 (480px 미만) */
+        @media (max-width: 479px) {
+            .timer {
+                gap: 10px;
+                margin-top: -40px;
+                /* 위치 조정 */
+            }
+
+            .digit,
+            .colon {
+                font-size: 90px;
+                /* 가장 작은 글자 크기 */
+            }
+        }
+
+        #startButton {
+            position: absolute;
+            padding: 15px 30px;
+            font-size: 24px;
+            background-color: #00608D;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: "DNFBitBitv2", sans-serif;
+            margin-top: 100px;
+        }
+
+        #startButton:hover {
+            background-color: #004d70;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="timer">
+        <div class="digit" id="hour1">2</div>
+        <div class="digit" id="hour2">4</div>
+        <div class="colon">:</div>
+        <div class="digit" id="minute1">0</div>
+        <div class="digit" id="minute2">0</div>
+        <div class="colon">:</div>
+        <div class="digit" id="second1">0</div>
+        <div class="digit" id="second2">0</div>
+    </div>
+    <button id="startButton">시작하기</button>
+
+    <script>
+        let timer;
+        let hours = 24;
+        let minutes = 0;
+        let seconds = 0;
+        let isRunning = false;
+
+        function updateTimerDisplay(h, m, s) {
+            const hStr = h.toString().padStart(2, '0');
+            const mStr = m.toString().padStart(2, '0');
+            const sStr = s.toString().padStart(2, '0');
+
+            document.getElementById('hour1').innerText = hStr[0];
+            document.getElementById('hour2').innerText = hStr[1];
+            document.getElementById('minute1').innerText = mStr[0];
+            document.getElementById('minute2').innerText = mStr[1];
+            document.getElementById('second1').innerText = sStr[0];
+            document.getElementById('second2').innerText = sStr[1];
+        }
+
+        function startTimer() {
+            if (isRunning) return;
+            
+            isRunning = true;
+            document.getElementById('startButton').style.display = 'none';
+            
+            timer = setInterval(() => {
+                if (seconds > 0) {
+                    seconds--;
+                } else {
+                    if (minutes > 0) {
+                        minutes--;
+                        seconds = 59;
+                    } else {
+                        if (hours > 0) {
+                            hours--;
+                            minutes = 59;
+                            seconds = 59;
+                        } else {
+                            clearInterval(timer);
+                            isRunning = false;
+                            return;
+                        }
+                    }
+                }
+                updateTimerDisplay(hours, minutes, seconds);
+            }, 1000);
+        }
+
+        document.getElementById('startButton').addEventListener('click', startTimer);
+        updateTimerDisplay(hours, minutes, seconds);
+    </script>
+</body>
+
+</html>
